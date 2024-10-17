@@ -25,7 +25,7 @@
         outline: none;
         box-sizing: border-box;
     }
-
+   
     .floating-label label {
         position: absolute;
         top: 12px;
@@ -38,6 +38,12 @@
         background-color: white;
         /* para evitar sobreposição do label */
         padding: 0 4px;
+    }
+    .floating-label label {
+        @media (max-width: 385px) {
+  
+    font-size: 14px;
+        }
     }
 
 
@@ -70,18 +76,18 @@
     <!-- Formulário -->
     <div class="container mx-auto p-4 mt-40">
         <div class="bg-white shadow-md rounded-lg p-8 max-w-lg mx-auto">
-            <div class="grid grid-cols-3 gap-2 mb-4 ">
+            <div class="grid grid-cols-3 gap-2 mb-4 overflow-visible">
 
                 <div class="floating-label">
                     <input type="number" id="floating_input" placeholder=" " required min="0" max="23" class=" ">
                     <label for="floating_input">horas</label>
                 </div>
                 <div class="floating-label">
-                    <input type="number" id="m1" placeholder=" " class="border p-2 text-center " min="0" max="59" />
+                    <input type="number" id="m1" placeholder=" " class="border text-center " min="0" max="59" />
                     <label for="m1">minutos</label>
                 </div>
                 <div class="floating-label">
-                    <input type="number" id="s1" placeholder=" " class="border p-2 text-center " min="0" max="59" />
+                    <input type="number" id="s1" placeholder=" " class="border  text-center " min="0" max="59" />
                     <label for="s1">segundos</label>
                 </div>
             </div>
