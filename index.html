@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiTech Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/input.css">
+</head>
+<style>
+    .floating-label {
+        position: relative;
+        margin-top: 16px;
+    }
+
+    .floating-label input {
+        width: 100%;
+        padding: 12px 10px;
+        font-size: 16px;
+
+        border: 2px solid #134e4a;
+        /* Borda laranja */
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .floating-label label {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        color: #666;
+        transform-origin: left top;
+        transition: all 0.2s ease;
+        pointer-events: none;
+        font-size: 16px;
+        background-color: white;
+        /* para evitar sobreposição do label */
+        padding: 0 4px;
+    }
+
+
+    .floating-label input:focus~label,
+    .floating-label input:not(:placeholder-shown)~label {
+        top: -10px;
+        left: 10px;
+        font-size: 12px;
+        color: #134e4a;
+        /* Cor laranja ao focar */
+    }
+
+    .floating-label input:focus {
+        border-color: #134e4a;
+    }
+</style>
+
+<body class="bg-gray-300 h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-teal-600 p-4 flex  fixed top-0 left-0 w-full z-10 items-center">
+        <div class="text-white text-2xl font-bold "><img src="./img/logo-removebg-preview.png" class="h-20 rounded" alt=""
+                srcset=""></div>
+        <h2 class="text-2xl font-bold text-teal-950">calculadora de horas</h2>
+
+    </nav>
+
+
+
+    <!-- Formulário -->
+    <div class="container mx-auto p-4 mt-40">
+        <div class="bg-white shadow-md rounded-lg p-8 max-w-lg mx-auto">
+            <div class="grid grid-cols-3 gap-2 mb-4 ">
+
+                <div class="floating-label">
+                    <input type="number" id="floating_input" placeholder=" " required min="0" max="23" class=" ">
+                    <label for="floating_input">horas</label>
+                </div>
+                <div class="floating-label">
+                    <input type="number" id="m1" placeholder=" " class="border p-2 text-center " min="0" max="59" />
+                    <label for="m1">minutos</label>
+                </div>
+                <div class="floating-label">
+                    <input type="number" id="s1" placeholder=" " class="border p-2 text-center " min="0" max="59" />
+                    <label for="s1">segundos</label>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mb-4">
+
+                <div class="floating-label">
+                    <input type="number" id="h2" placeholder=" " class="border p-2 text-center" min="0" max="23" />
+                    <label for="h2">horas</label>
+
+                </div>
+                <div class="floating-label">
+                    <input type="number" id="m2" placeholder=" " class="border p-2 text-center" min="0" max="59" />
+                    <label for="m2">minutos</label>
+                </div>
+                <div class="floating-label">
+                    <input type="number" id="s2" placeholder=" " class="border p-2 text-center" min="0" max="59" />
+                    <label for="s2">segundos</label>
+                </div>
+            </div>
+
+            <!-- Botões de controle -->
+            <div class=" grid grid-cols-3 gap-4">
+                <button id="btn-add"
+                    class="bg-teal-600 text-white lg:text-lg rounded text-xs  p-1 sm:p-2 w-full hover:bg-teal-800 font-bold">adição</button>
+                <button id="btn-subtract"
+                    class="bg-teal-600 text-white lg:text-lg rounded text-xs p-1 sm:p-2 w-full hover:bg-teal-800 font-bold">subtração</button>
+                <button id="btn-reset"
+                    class="bg-teal-600 text-white   lg:text-lg rounded text-xs p-1 sm:p-2 w-full hover:bg-teal-800 font-bold">reset</button>
+            </div>
+
+            <div class="mt-6">
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <input type="number" id="result-h" placeholder="h"
+                        class="border p-2 text-center bg-teal-600 hover:bg-teal-800 text-white font-bold rounded"
+                        disabled />
+                    <input type="number" id="result-m" placeholder="m"
+                        class="border p-2 text-center bg-teal-600 hover:bg-teal-800 text-white font-bold rounded"
+                        disabled />
+                    <input type="number" id="result-s" placeholder="s"
+                        class="border p-2 text-center bg-teal-600 hover:bg-teal-800 text-white font-bold rounded"
+                        disabled />
+                </div>
+                <div class="flex items-center">
+                    <button id="btn-save"
+                        class="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-800 font-bold  lg:text-lg text-xs">guardar</button>
+                    
+                </div>
+            </div>
+
+            <div id="error-message" class="text-red-600 mt-2 hidden">Erro: A segunda hora não pode ser maior que a
+                primeira!</div>
+        </div>
+        <section class="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+            <h2 class="text-2xl font-bold mb-4 text-teal-950">como usar a calculadora de horas LiTech</h2>
+            <p class="text-gray-700 mb-4">
+                Esta calculadora permite que você adicione e subtraia horas, minutos e segundos facilmente. Siga as
+                instruções abaixo para aproveitar ao máximo suas funcionalidades.
+            </p>
+
+            <ul class="list-disc pl-6 text-gray-700 mb-4">
+                <li><strong>Adicionar Horas:</strong> Insira as horas, minutos e segundos nos campos correspondentes da
+                    primeira e segunda linha. Clique no botão "ADIÇÃO" para somar os valores.</li>
+                <li><strong>Subtrair Horas:</strong> Para subtrair horas, preencha os dois conjuntos de campos de horas,
+                    minutos e segundos. Se tentar subtrair um valor maior do que o primeiro, será exibida uma mensagem
+                    de erro.</li>
+                <li><strong>Resetar:</strong> Clique no botão "RESET" para limpar todos os campos e reiniciar o
+                    processo.</li>
+                <li><strong>Guardar Resultado:</strong> Após realizar uma operação de adição ou subtração, clique no
+                    botão "GUARDAR" para salvar o resultado no primeiro conjunto de campos.</li>
+                <li><strong>Opção Automática:</strong> Marque a caixa de seleção "Guardar auto." para que o resultado da
+                    operação seja automaticamente salvo no primeiro conjunto de campos.</li>
+            </ul>
+
+            <p class="text-gray-700 mb-4">
+                A calculadora também oferece a função de correção automática, convertendo os segundos e minutos
+                excedentes (60 ou mais) para os minutos e horas correspondentes.
+            </p>
+
+            <p class="text-gray-700">
+                <strong>Importante:</strong> Certifique-se de que o valor da segunda linha nunca seja maior que o da
+                primeira linha ao subtrair horas. Caso contrário, uma mensagem de erro aparecerá.
+            </p>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-teal-600 p-4 mt-10">
+        <div class="text-center text-white">
+            <a href="#" class="mx-2 hover:text-lg  hover:text-teal-900 transition duration-200 font-bold">Facebook</a>
+            <a href="#" class="mx-2 hover:text-lg transition hover:text-teal-900 duration-200 font-bold">Twitter</a>
+            <a href="#" class="mx-2 hover:text-lg hover:text-teal-900 transition duration-200 font-bold">Instagram</a>
+        </div>
+    </footer>
+
+    <script src="./src/script.js"></script>
+</body>
+
+</html>

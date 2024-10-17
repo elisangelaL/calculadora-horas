@@ -100,3 +100,5 @@ document.getElementById('btn-save').addEventListener('click', () => {
     document.getElementById('result-m').value = '';
     document.getElementById('result-s').value = '';
 });
+
+console.log('Script loaded');
